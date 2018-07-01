@@ -1,0 +1,19 @@
+<div class="list-group-item taskItem row"
+    [ngClass]="{overdueTask: onTestDeadline(taskItem)<0,
+                dangerTask: onTestDeadline(taskItem)<3 && onTestDeadline(taskItem)>0,
+                done: taskItem.isDone==true}">
+  <div class="row">
+    <a href="#" class="col-4"(click)="viewDetails()">
+      {{ taskItem.name }}
+    </a>
+    <ng-content *ngIf="taskItem.isDone===true" select=".done"></ng-content>
+    <ng-content *ngIf="taskItem.isDone===false" select=".current"></ng-content>
+    <ng-content select="button.current"></ng-content>
+
+  </div>
+  <app-task-detail
+    (deletedTask)="onDeletedTask($event)"
+    *ngIf="isTaskSelected"
+    [detailedTaskItem]="taskItem">
+  </app-task-detail>
+</div>

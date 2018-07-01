@@ -1,0 +1,17 @@
+<p *ngIf="!taskEdit">
+  {{ detailedTaskItem.description }}
+</p>
+
+<div class="edit row" *ngIf="taskEdit">
+  <div class="row col-12">
+    <input class="form-control col-md-3" value="{{ detailedTaskItem.name }}"
+          [(ngModel)]="newName">
+    <input class="form-control col-md-3" placeholder="{{ detailedTaskItem.description }}"
+          [(ngModel)]="newDescription">
+    <input class="form-control col-md-3" type="date"
+          [(ngModel)]="newDeadline">
+  </div>
+</div>
+<button *ngIf="taskEdit" class="btn btn-success" type="button" (click)="onSaveEdit()"> Save </button>
+<button *ngIf="!taskEdit" class="btn btn-info" type="button" (click)="onEditTask()"> Edit </button>
+<button type="button" class="btn btn-danger" (click)="onDeleteTask()"> Delete </button>

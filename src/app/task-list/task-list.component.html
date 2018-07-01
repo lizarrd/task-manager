@@ -1,0 +1,33 @@
+<div class="row newTask">
+  <input class="text col-md-3 col-12 form-control" type="text" placeholder="Name" [(ngModel)]="name" (input)="onAllowButtonClick($event)">
+  <input class="text col-md-4 col-12 form-control" type="text" placeholder="Description" [(ngModel)]="description">
+  <input type="date" class="col-md-2 col-12 form-control" [(ngModel)]="deadline">
+  <button class="add btn col-md-2 col-12 form-control" type="button" (click)="addTask()" [disabled]="!allowButtonClick" > Add task </button>
+</div>
+
+
+<h2> Current tasks: </h2>
+<div [sortablejs]="tasks">
+  <app-task-item
+    class="list-group current"
+    (delTask)="onTaskDelete(task)"
+    *ngFor="let task of tasks"
+    [taskItem]="task">
+
+    <p class="current col-6"> Deadline: {{ task.deadline }} </p>
+    <button class="btn col-2 current" type="button" (click)="onTaskDone(task)"> Done </button>
+
+  </app-task-item>
+</div>
+
+<h2> Done tasks: </h2>
+<div [sortablejs]="tasks">
+  <app-task-item
+    class="list-group"
+    (doneTask)="onTaskDone(task)"
+    (delTask)="onTaskDelete(task)"
+    *ngFor="let task of doneTasks"
+    [taskItem]="task">
+    <p class="done"> Was done: {{ task.deadline }} </p>
+  </app-task-item>
+</div>
